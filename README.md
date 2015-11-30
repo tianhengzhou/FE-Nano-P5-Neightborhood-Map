@@ -1,5 +1,5 @@
 # FE-Nano-P5-Neightborhood-Map
-## How to Install and Run this Project
+### How to Install and Run this Project
     1. Install Node.js in your computer.
     2. Change Directory to your project folder.
     3. Type npm install to install dependency.

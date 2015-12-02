@@ -17,7 +17,8 @@ var mapViewModel = function(){
         };
         var map = new google.maps.Map(document.getElementById("map"),
             mapOptions);
-        addMapMark(myLatlng,200,map)
+        addMapMark(myLatlng,200,map);
+        yelpSearch('94087','Chinese Food')
         }
     function addMapMark(position, timeout, map){
         window.setTimeout(
@@ -32,11 +33,14 @@ var mapViewModel = function(){
             }, timeout
         )
     }
-    function yelpSearch(zipCode, searchFor){
-        var searchUrl = "/yelpsearch?zipcode="+zipCode+"&search="+searchFor;
+    function yelpSearch(location, term){
+        var searchUrl = "/yelpsearch?location="+location+"&term="+term;
         $.getJSON(searchUrl,function(data){
-
+            console.log(data)
         })
+    }
+    function yelpBusinessList(bName,bLoc,bSnippet,bSnippet_image,bRating,bUrl){
+
     }
     mapInit();
 };

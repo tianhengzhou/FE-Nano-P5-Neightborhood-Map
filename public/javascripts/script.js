@@ -36,11 +36,24 @@ var mapViewModel = function(){
     function yelpSearch(location, term){
         var searchUrl = "/yelpsearch?location="+location+"&term="+term;
         $.getJSON(searchUrl,function(data){
-            console.log(data)
+            data.businesses.forEach(function(business){
+                var bName = business.name,
+                    bLoc,
+                    bSnippet = business.snippet_text,
+                    bSnippet_image = business.snippet_image_url,
+                    bRating = business.rating_img_url_large,
+                    bUrl = business.url;
+                bLoc = {
+                    lat: business.coordinate.latitude,
+                    lon: business.coordinate.longitude,
+                    add: business.display_address
+                };
+                yelpBusinessList(bName, bLoc, bSnippet, bSnippet_image, bRating,bUrl)
+            })
         })
     }
     function yelpBusinessList(bName,bLoc,bSnippet,bSnippet_image,bRating,bUrl){
-
+        var $yelpBusinessList = $('#mark_info')
     }
     mapInit();
 };

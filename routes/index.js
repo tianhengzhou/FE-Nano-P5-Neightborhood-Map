@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Yelp = require('../model/Yelp.js');
+var Yelp = require('../model/yelp.js');
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });

@@ -16,7 +16,7 @@ function Yelp(location,term,callback) {
     this.location = location;
     this.term = term;
     var baseUrl = 'https://api.yelp.com/v2/search/?';
-    var completeUrl = baseUrl+'location='+location+'&'+'term='+term+'&radius_filter=5000';
+    var completeUrl = baseUrl+'location='+location+'&'+'term='+term+'&radius_filter=10000';
     console.log(completeUrl);
     var oauth = new OAuth.OAuth(
         null,

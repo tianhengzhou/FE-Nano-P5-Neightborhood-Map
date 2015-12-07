@@ -1,7 +1,6 @@
 /**
  * Created by tianhengzhou on 12/3/15.
  */
-/* Small devices (tablets, 768px and up) */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -6729,26 +6728,73 @@ button.close {
   }
 }
 .screen {
-  height: 15%;
+  /*Extra small for mobile and as default*/
+  bottom: -20%;
+  height: 20%;
   width: 100%;
+  transition-duration: 1s;
+  /* Small devices (tablets, 768px and up) */
   /* Medium devices (desktops, 992px and up) */
   /* Large devices (large desktops, 1200px and up) */
 }
 @media (min-width: 768px) {
   .screen {
     height: 100%;
-    width: 25%;
+    width: 30%;
+    bottom: 0;
+    left: -30%;
   }
 }
 @media (min-width: 992px) {
   .screen {
     height: 100%;
     width: 25%;
+    bottom: 0;
+    left: -25%;
   }
 }
 @media (min-width: 1200px) {
   .screen {
     height: 100%;
-    width: 25%;
+    width: 20%;
+    bottom: 0;
+    left: -20%;
   }
+}
+/* Place the List to bottom with 1/10 of height for Mobile display */
+.bottom {
+  bottom: -20%;
+  height: 20%;
+  width: 100%;
+}
+.screen-show {
+  /*Extra small for mobile and as default*/
+  transform: translate(0, -100%);
+  /* Small devices (tablets, 768px and up) */
+  /* Medium devices (desktops, 992px and up) */
+  /* Large devices (large desktops, 1200px and up) */
+}
+@media (min-width: 768px) {
+  .screen-show {
+    bottom: 0;
+    transform: translate(100%);
+  }
+}
+@media (min-width: 992px) {
+  .screen-show {
+    bottom: 0;
+    transform: translate(100%);
+  }
+}
+@media (min-width: 1200px) {
+  .screen-show {
+    bottom: 0;
+    transform: translate(100%);
+  }
+}
+.bottom-show {
+  transform: translate(0, -100%);
+}
+.side-show {
+  transform: translate(100%);
 }

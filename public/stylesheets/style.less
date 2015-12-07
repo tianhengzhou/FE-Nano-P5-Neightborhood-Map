@@ -7,6 +7,10 @@ html, body {
   margin: 0;
   padding: 0;
 }
+body{
+  overflow-x: hidden;
+  position: relative;
+}
 div{
   display: block;
 }
@@ -18,7 +22,40 @@ a {
 }
 .yelpList{
   z-index: 99;
-  color: #000;
-  margin: 1px;
+  overflow-y: auto;
+  position: absolute;
   .screen
+}
+.yelpList ul {
+  padding: 0;
+  margin-bottom: 0;
+}
+.yelpList ul{
+  li{
+    list-style: none;
+    padding: 5%;
+    border-bottom: 1px solid gainsboro;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.88);
+    height: 200px;
+  }
+  .active{
+    background-color: lightgrey;
+  }
+  li:hover{
+    background-color: lightcyan;
+  }
+  //&:hover{
+  //  background-color: lightcyan;
+  //}
+}
+.img-container{
+  text-align: center;
+  padding: 5px;
+}
+.img-container img:first-child{
+  .img-thumbnail
+}
+.show{
+.screen-show
 }

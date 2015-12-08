@@ -1,8 +1,8 @@
 /**
  * Created by tianhengzhou on 12/4/15.
  */
-var mkr,
-    mapMarkers = [];
+var mapMarkers = [],
+    activeImage = '/images/yelp_star_active.png';
 function mapInit() {
     var myLatlng = new google.maps.LatLng(37.352886, -122.012384);
     var mapOptions = {
@@ -16,7 +16,6 @@ function mapInit() {
     };
     var map = new google.maps.Map(document.getElementById("map"),
         mapOptions);
-    addMapMark(myLatlng, 200, map);
     map.addListener('click',function(){
         window.setTimeout(function() {
             $('#mark_info').removeClass('show')
@@ -29,13 +28,21 @@ function mapInit() {
     return yelpSearch('94087', 'Chinese', map)
 }
 
-function addMapMark(position, timeout, map, i) {
+function addBusinessMark(position, timeout, map, i) {
+    var iconImage = {
+        url: '/images/yelp_star.png',
+        size: new google.maps.Size(24, 32)
+    };
+    var activeImage ={
+      url: '/images/yelp_star_active.png'
+    };
     window.setTimeout(
         function () {
-            mkr = new google.maps.Marker(
+            var mkr = new google.maps.Marker(
                 {
                     position: position,
                     map: map,
+                    icon: iconImage,
                     animation: google.maps.Animation.DROP
                 }
             );
@@ -46,6 +53,16 @@ function addMapMark(position, timeout, map, i) {
 
             })(mkr,i)
             );
+            mkr.addListener('mouseover',function(){
+                var icon = mkr.getIcon();
+                icon.url = '/images/yelp_star_active.png';
+                mkr.setIcon(icon)
+            });
+            mkr.addListener('mouseout', function(){
+                var icon = mkr.getIcon();
+                icon.url = '/images/yelp_star.png';
+                mkr.setIcon(icon)
+            });
             mapMarkers.push(mkr);
         }, timeout
     )
@@ -79,7 +96,7 @@ function pushBusinessMarker(dataSet, map, i){
     var blat = dataSet.location.coordinate.latitude,
         blng = dataSet.location.coordinate.longitude,
         bposition = new google.maps.LatLng(blat, blng);
-    addMapMark(bposition,200, map, i)
+    addBusinessMark(bposition,200, map, i)
 }
 function mouseOverMarkEvent(){
 
@@ -88,7 +105,9 @@ function toggleBounce(mkr,i){
 
     if (mkr.getAnimation()!== null){
         mkr.setAnimation(null);
-        $('#mark_info').removeClass('show');
+        window.setTimeout(function() {
+            $('#mark_info').removeClass('show')
+        }, 600);
         $('#yelp_list').find('li').removeClass('active');
     }
     else{

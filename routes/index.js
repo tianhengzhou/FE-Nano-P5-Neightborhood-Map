@@ -3,7 +3,7 @@ var router = express.Router();
 var Yelp = require('../model/yelp.js');
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Yelp Sheet' });
 });
 /* Get yelp search result data and send it to frontend*/
 router.get('/yelpsearch',function(req,res){

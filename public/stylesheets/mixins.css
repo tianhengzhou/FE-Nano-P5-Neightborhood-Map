@@ -1,5 +1,6 @@
 /**
  * Created by tianhengzhou on 12/3/15.
+ * This file contains the frequent mixins that I used.
  */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -6729,11 +6730,13 @@ button.close {
 }
 .screen {
   /*Extra small for mobile and as default*/
+  /*Mobile device list shows up at the bottom*/
   bottom: -20%;
   height: 20%;
   width: 100%;
   transition-duration: 1s;
   /* Small devices (tablets, 768px and up) */
+  /* All bigger device the list show up at the left hand side*/
   /* Medium devices (desktops, 992px and up) */
   /* Large devices (large desktops, 1200px and up) */
 }
@@ -6761,7 +6764,7 @@ button.close {
     left: -20%;
   }
 }
-/* Place the List to bottom with 1/10 of height for Mobile display */
+/* Place the List to bottom with 1/5 of height for Mobile display */
 .bottom {
   bottom: -20%;
   height: 20%;
@@ -6792,9 +6795,16 @@ button.close {
     transform: translate(100%);
   }
 }
+/* The mixins used to pulling out the list from either bottom or side*/
 .bottom-show {
   transform: translate(0, -100%);
 }
 .side-show {
   transform: translate(100%);
+}
+/* Center the search box*/
+.center {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }

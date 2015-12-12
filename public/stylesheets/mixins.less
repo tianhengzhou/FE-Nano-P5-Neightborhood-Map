@@ -1,9 +1,11 @@
 /**
  * Created by tianhengzhou on 12/3/15.
+ * This file contains the frequent mixins that I used.
  */
 @import "bower_components/bootstrap/less/bootstrap.less";
 .screen {
   /*Extra small for mobile and as default*/
+  /*Mobile device list shows up at the bottom*/
   .bottom;
   transition-duration: 1s;
   /* Small devices (tablets, 768px and up) */
@@ -13,7 +15,7 @@
     bottom: 0;
     left: -30%;
   }
-
+  /* All bigger device the list show up at the left hand side*/
   /* Medium devices (desktops, 992px and up) */
   @media (min-width: @screen-md-min) {
     height:100%;
@@ -30,7 +32,7 @@
     left: -20%;
   }
 }
-/* Place the List to bottom with 1/10 of height for Mobile display */
+/* Place the List to bottom with 1/5 of height for Mobile display */
 .bottom {
   bottom: -20%;
   height: 20%;
@@ -57,9 +59,17 @@
     .side-show
   }
 }
+/* The mixins used to pulling out the list from either bottom or side*/
 .bottom-show{
   transform: translate(0,-100%);
 }
 .side-show{
   transform: translate(100%);
 }
+/* Center the search box*/
+.center{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+

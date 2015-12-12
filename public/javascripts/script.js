@@ -14,7 +14,7 @@ function mapViewModel() {
             }, self);
         };
 }
-// Bind the viewport
+// Bind the view model to view.
 $(function(){
     ko.applyBindings(new mapViewModel());
 });

@@ -14,14 +14,20 @@
             <i class="fa fa-search fa-5"></i>
           </button>
       </form>
+      <form action="" data-bind="submit: filterResult">
+        <input type="text" class="form-control" data-bind="value: filterTerm, valueUpdate: 'afterkeydown'"/>
+        <button class="btn btn-default" data-bind="click: filterResult">
+          <i class="fa fa-search fa-5"></i>
+        </button>
+      </form>
     </div>
       <div id="mark_info" class="yelpList">
-        <ul id="yelp_list" data-bind="foreach: blists">
+        <ul id="yelp_list" data-bind="foreach: filterList">
           <li data-bind="click: $parent.listToMarkerEvent">
             <div class="row">
               <div class="col-xs-3 img-container">
                 <img alt="business image" data-bind="attr:{src: image_url}"/>
-                <img alt="business image" data-bind="attr: { src: rating_img_url}"/>
+                <img alt="business image" data-bind="attr: { src: rating_img_url_small}"/>
               </div>
               <div class="col-xs-9">
                 <a data-bind="attr:{href: url}"><h4 data-bind="text: name"></h4></a>

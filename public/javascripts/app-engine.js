@@ -8,16 +8,18 @@ function mapViewModel() {
   self.searchTerm = ko.observable('Chinese Food');
   // update search result function
   self.updateSearchResult = function() {
+    self.blists([]);
+    clearMarker();
+    self.filterList([]);
     ko.computed(function() {
-      window.setTimeout(function() {
         yelpSearch('94087', self.searchTerm());
-      }, 600)
     }, self);
   };
-
-  self.mapMarkers = ko.observableArray([]);
-  self.blists = ko.observableArray([]);
-
+  this.filterTerm = ko.observable('');
+  this.mapMarkers = ko.observableArray([]);
+  this.blists = ko.observableArray([]);
+  this.filterList = ko.observable([]);
+  this.toggle = ko.observable('hide');
   var myLatlng = new google.maps.LatLng(37.352886, -122.012384);
   var mapOptions = {
     zoom: 12,
@@ -48,7 +50,7 @@ function mapViewModel() {
   /*
    * Add business mark onto map.
    * */
-  function addBusinessMark(position, timeout, i, dataSet) {
+  function addBusinessMark(position, timeout, i, dataSet, flag) {
     var iconImage = {
       url: '/images/yelp_star.png',
       size: new google.maps.Size(24, 32)
@@ -67,9 +69,14 @@ function mapViewModel() {
           var mkr = new google.maps.Marker({
             position: position,
             map: map,
-            icon: iconImage,
-            animation: google.maps.Animation.DROP
+            icon: iconImage
           });
+          if (flag){
+            mkr.setAnimation(google.maps.Animation.DROP)
+          }
+          else{
+            mkr.setAnimation(null)
+          }
           /*
            * Add mouse click event to set bounce animate to mark. Also pulling out list and set the viewport to
            * the corresponded list item.
@@ -99,59 +106,54 @@ function mapViewModel() {
     )
   }
 
-  // Sets the map on all markers in the array.
-/*  function setMapOnAll(map) {
-    for (var i = 0; i < mapMarkers.length; i++) {
-      mapMarkers[i].setMap(map);
-    }
-  }*/
-
-/*  // Removes the markers from the map, but keeps them in the array.
-  function clearMarkers() {
-    setMapOnAll(null);
-  }
-
-  // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
-    clearMarkers();
-    mapMarkers = [];
-  }*/
-
   //Assemble url and use Ajax function to get data from backend and use the data to construct the business list
   // and markers.
   function yelpSearch(location, term) {
     var searchUrl = "/yelpsearch?location=" + location + "&term=" + term;
     $.get(searchUrl, function(data) {
-      yelpList(JSON.parse(data));
+      yelpList(JSON.parse(data).businesses);
     });
   }
 
   // The function used to construct business list and markers.
-  function yelpList(data, map) {
+  function yelpList(data) {
     var yelpList = $('#yelp_list');
     yelpList.empty();
-    //deleteMarkers();
-    data.businesses.forEach(function(business, i) {
-      self.blists.push(business);
-      console.log(self.blists());
-      pushBusinessMarker(business, i)
-    })
+    data.forEach(function(business, i) {
+      self.blists().push(business);
+      pushBusinessMarker(self.blists()[i], i, 1);
+    });
+    self.filterList(self.blists());
   }
-  // The template to generate each single list item.
-  function listTemplate(dataSet) {
-    var bImage = "<img src='" + dataSet.image_url + "'>",
-        bRating = "<img src='" + dataSet.rating_img_url_small + "'>",
-        lImage = "<li><div class='row'><div class='col-xs-3 img-container'>" +
-            bImage + bRating +
-            "</div>",
-        lTitle = "<div class='col-xs-9'><h4><a href='" + dataSet.url + "'>" +
-            dataSet.name + "</a></h4>",
-        lphone = "<p>" + dataSet.display_phone + "<p>",
-        lAddress = "<p>" + dataSet.location.display_address.join("</p><p>") +
-            "</p></div></div></li>";
-    return lImage + lTitle + lphone + lAddress
+  function clearMarker(){
+    self.mapMarkers().forEach(function(marker){
+      marker.setMap(null)
+    });
+    self.mapMarkers([])
   }
-
+  this.filterResult = function(){
+    var rawList = self.blists();
+    var array = ko.observableArray([]);
+    var filterTerm = self.filterTerm().toLowerCase();
+    var count = 0;
+    clearMarker();
+    if (!filterTerm){
+      self.filterList(rawList);
+      rawList.forEach(function(item,i){
+        pushBusinessMarker(item, i, 0);
+      });
+    }
+    else{
+      rawList.forEach(function(item,i){
+        if (item.name.toLowerCase().indexOf(filterTerm) != -1){
+          array().push(item);
+          pushBusinessMarker(item, count);
+          count += 1;
+        }
+      });
+      self.filterList(array());
+    }
+  };
   // The template to generate the info window for each marker.
   function infoWindowTemplate(dataSet) {
     var snippetImage = "<img src='" + dataSet.snippet_image_url + "'>",
@@ -162,11 +164,11 @@ function mapViewModel() {
   }
 
   // The function to push the markers onto maps.
-  function pushBusinessMarker(dataSet, i) {
+  function pushBusinessMarker(dataSet, i, flag) {
     var blat = dataSet.location.coordinate.latitude,
         blng = dataSet.location.coordinate.longitude,
         bposition = new google.maps.LatLng(blat, blng);
-    addBusinessMark(bposition, 200, i, dataSet)
+    addBusinessMark(bposition, 200, i, dataSet, flag)
   }
 
   // The event for opening the info window for each marker.
@@ -198,5 +200,9 @@ function mapViewModel() {
 }
 
 $(function() {
-  ko.applyBindings(new mapViewModel());
+  var MVM = new mapViewModel();
+  ko.applyBindings(MVM);
+  MVM.filterTerm.subscribe(function(){
+    MVM.filterResult()
+  })
 });

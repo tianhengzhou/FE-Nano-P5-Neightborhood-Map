@@ -9,38 +9,35 @@
   <body>
     <div id="search" class="search-box">
       <form action="" data-bind="submit:updateSearchResult">
-          <input type="text" class="form-control" data-bind="value: searchTerm"/>
-          <button type="submit" class="btn btn-default" data-bind="click::updateSearchResult">
-            <i class="fa fa-search fa-5"></i>
-          </button>
+          <i class="fa fa-2x fa-search"></i><input id="search" type="text" class="form-control" data-bind="value: searchTerm"/>
       </form>
       <form action="" data-bind="submit: filterResult">
-        <input type="text" class="form-control" data-bind="value: filterTerm, valueUpdate: 'afterkeydown'"/>
-        <button class="btn btn-default" data-bind="click: filterResult">
-          <i class="fa fa-search fa-5"></i>
-        </button>
+        <i class="fa fa-2x fa-filter"></i><input id="filter" type="text" class="form-control" placeholder="filter" data-bind="value: filterTerm, valueUpdate: 'afterkeydown'"/>
       </form>
     </div>
-      <div id="mark_info" class="yelpList">
-        <ul id="yelp_list" data-bind="foreach: filterList">
-          <li data-bind="click: $parent.listToMarkerEvent">
-            <div class="row">
-              <div class="col-xs-3 img-container">
-                <img alt="business image" data-bind="attr:{src: image_url}"/>
-                <img alt="business image" data-bind="attr: { src: rating_img_url_small}"/>
-              </div>
-              <div class="col-xs-9">
-                <a data-bind="attr:{href: url}"><h4 data-bind="text: name"></h4></a>
-                <p data-bind="text: display_phone"></p>
-                <div data-bind="foreach: location.display_address">
-                  <p data-bind="text: $data"></p>
-                </div>
-              </div>
-
+    <div id="mark_info" class="yelp-list">
+      <ul id="yelp_list" data-bind="foreach: filterList">
+        <li data-bind="click: $parent.listToMarkerEvent">
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-3 img-container">
+              <img alt="business image" data-bind="attr:{src: image_url}"/>
+              <img alt="business image" data-bind="attr: { src: rating_img_url}"/>
             </div>
-          </li>
-        </ul>
-      </div>
+            <div class="col-xs-8">
+              <a data-bind="attr:{href: url}"><h4 data-bind="text: name"></h4></a>
+              <p data-bind="text: display_phone"></p>
+              <div data-bind="foreach: location.display_address">
+                <p data-bind="text: $data"></p>
+              </div>
+            </div>
+
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div id="switch" class="switch-bar" data-bind="click: switchShow">
+      <i class="fa fa-angle-double-right fa-4x"></i>
+    </div>
     <div id="map" >
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDH-lgHzXHDMukrTqPlGZfJ1rY43LZPprw"

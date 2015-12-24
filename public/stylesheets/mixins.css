@@ -6808,3 +6808,120 @@ button.close {
   left: 50%;
   transform: translate(-50%, 0);
 }
+.center-horizontal {
+  left: 45%;
+}
+.center-vertical {
+  bottom: 45%;
+}
+.switch {
+  /*Extra small for mobile and as default*/
+  /*Mobile device list shows up at the bottom*/
+  left: 45%;
+  bottom: 0;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  transition-duration: 1s;
+  /* Small devices (tablets, 768px and up) */
+  /* All bigger device the list show up at the left hand side*/
+  /* Medium devices (desktops, 992px and up) */
+  /* Large devices (large desktops, 1200px and up) */
+}
+@media (min-width: 768px) {
+  .switch {
+    left: 0;
+    bottom: 45%;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@media (min-width: 992px) {
+  .switch {
+    left: 0;
+    bottom: 45%;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@media (min-width: 1200px) {
+  .switch {
+    left: 0;
+    bottom: 45%;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+.switch-bottom {
+  left: 45%;
+  bottom: 0;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.switch-show {
+  /*Extra small for mobile and as default*/
+  bottom: 20%;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  /* Small devices (tablets, 768px and up) */
+  /* Medium devices (desktops, 992px and up) */
+  /* Large devices (large desktops, 1200px and up) */
+}
+@media (min-width: 768px) {
+  .switch-show {
+    left: 30%;
+    bottom: 45%;
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+}
+@media (min-width: 992px) {
+  .switch-show {
+    left: 25%;
+    bottom: 45%;
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+}
+@media (min-width: 1200px) {
+  .switch-show {
+    left: 20%;
+    bottom: 45%;
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+}
+.switch-bottom-show {
+  bottom: 20%;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}

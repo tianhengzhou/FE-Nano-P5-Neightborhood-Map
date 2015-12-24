@@ -12,7 +12,9 @@ function mapViewModel() {
     clearMarker();
     self.filterList([]);
     ko.computed(function() {
+      window.setTimeout(function(){
         yelpSearch('94087', self.searchTerm());
+      },600)
     }, self);
   };
   this.filterTerm = ko.observable('');
@@ -38,12 +40,18 @@ function mapViewModel() {
   function mapInit() {
     map.addListener('click', function() {
       window.setTimeout(function() {
-        $('#mark_info').removeClass('show')
+        $('#mark_info').removeClass('show');
+        $('#switch').removeClass('switchShow');
       }, 600);
       $('#yelp_list').find('li').removeClass('active');
       self.mapMarkers().forEach(function(marker) {
         marker.setAnimation(null);
       })
+    });
+    google.maps.event.addDomListener(window, "resize", function() {
+      var center = map.getCenter();
+      google.maps.event.trigger(map, "resize");
+      map.setCenter(center);
     });
   }
 
@@ -192,8 +200,13 @@ function mapViewModel() {
     $('#mark_info').animate({
       scrollTop: 200 * i
     });
-    $('#mark_info').addClass('show')
+    $('#mark_info').addClass('show');
+    $('#switch').addClass('switchShow');
   }
+  this.switchShow = function(){
+   $('#switch').toggleClass('switchShow');
+    $('#mark_info').toggleClass('show')
+  };
   // Map sequence initiating and set original info as Chinese food
   mapInit();
   yelpSearch('94087', 'Chinese Food');

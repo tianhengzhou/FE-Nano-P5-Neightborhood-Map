@@ -20,23 +20,22 @@ div{
 a {
   color: #00B7FF;
 }
-.yelpList{
+.yelp-list{
   z-index: 99;
   overflow-y: auto;
   position: absolute;
+  background-color: rgba(255, 255, 255, 0.88);
   .screen
 }
-.yelpList ul {
+.yelp-list ul {
   padding: 0;
   margin-bottom: 0;
 }
-.yelpList ul{
+.yelp-list ul{
   li{
     list-style: none;
-    padding: 0 5%;
     border-bottom: 1px solid gainsboro;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.88);
     height: 200px;
   }
   .active{
@@ -49,6 +48,7 @@ a {
 .img-container{
   text-align: center;
   padding: 5px;
+  margin-top: 5%;
 }
 .img-container img:first-child{
   .img-thumbnail
@@ -65,25 +65,35 @@ a {
     margin-right: 5px;
   }
 }
+.switch-bar{
+  width: 32px;
+  position: absolute;
+  z-index: 98;
+  .switch
+}
 .search-box{
   z-index: 99;
   top: 2%;
+  background-color: rgba(255, 255, 255, 0.88);
+  padding: 5px;
   .center;
+  i{
+    width:23%;
+    float: left;
+    position: relative;
+    left:5%;
+  }
   input{
-    width: 200px;
+    width: 65%;
     height: 30px;
     display: inline-block;
     float: left;
   }
-  button{
-    width: 30px;
-    height: 30px;
-    border-radius: 5%;
-    display: inline-block;
-    padding: 0;
-  }
+}
+.switchShow{
+  .switch-show
 }
 .show{
-.screen-show
+  .screen-show
 }
 

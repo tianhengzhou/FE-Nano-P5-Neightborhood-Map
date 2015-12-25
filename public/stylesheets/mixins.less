@@ -3,6 +3,7 @@
  * This file contains the frequent mixins that I used.
  */
 @import "bower_components/bootstrap/less/bootstrap.less";
+@import "variable.less";
 .screen {
   /*Extra small for mobile and as default*/
   /*Mobile device list shows up at the bottom*/
@@ -34,8 +35,8 @@
 }
 /* Place the List to bottom with 1/5 of height for Mobile display */
 .bottom {
-  bottom: -20%;
-  height: 20%;
+  bottom: -@bottom-size;
+  height: @bottom-size;
   width: 100%;
 }
 .screen-show{
@@ -162,7 +163,7 @@
   }
 }
 .switch-bottom-show{
-  bottom: 20%;
+  bottom: @bottom-size;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);

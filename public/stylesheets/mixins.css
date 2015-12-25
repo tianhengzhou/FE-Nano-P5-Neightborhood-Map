@@ -6728,11 +6728,15 @@ button.close {
     display: none !important;
   }
 }
+/**
+ * Created by tianhengzhou on 12/22/15.
+ * This file contains the frequent variable that I used.
+ */
 .screen {
   /*Extra small for mobile and as default*/
   /*Mobile device list shows up at the bottom*/
-  bottom: -20%;
-  height: 20%;
+  bottom: -30%;
+  height: 30%;
   width: 100%;
   transition-duration: 1s;
   /* Small devices (tablets, 768px and up) */
@@ -6766,8 +6770,8 @@ button.close {
 }
 /* Place the List to bottom with 1/5 of height for Mobile display */
 .bottom {
-  bottom: -20%;
-  height: 20%;
+  bottom: -30%;
+  height: 30%;
   width: 100%;
 }
 .screen-show {
@@ -6874,7 +6878,7 @@ button.close {
 }
 .switch-show {
   /*Extra small for mobile and as default*/
-  bottom: 20%;
+  bottom: 30%;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -6918,7 +6922,7 @@ button.close {
   }
 }
 .switch-bottom-show {
-  bottom: 20%;
+  bottom: 30%;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);

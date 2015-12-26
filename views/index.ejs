@@ -17,7 +17,7 @@
     </div>
     <div id="mark_info" class="yelp-list">
       <ul id="yelp_list" data-bind="foreach: filterList">
-        <li data-bind="click: $parent.listToMarkerEvent">
+        <li data-bind="click: $parent.listToMarkerEvent($data, $index())">
           <div class="row">
             <div class="col-xs-offset-1 col-xs-3 img-container">
               <img alt="business image" data-bind="attr:{src: image_url}"/>

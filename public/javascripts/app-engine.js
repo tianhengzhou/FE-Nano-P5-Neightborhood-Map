@@ -4,6 +4,7 @@
  */
 function mapViewModel() {
   var self = this;
+  var infowindowforlist;
   // Define search term and assign initial value as Chinese food
   self.searchTerm = ko.observable('Chinese Food');
   // update search result function
@@ -58,8 +59,20 @@ function mapViewModel() {
     }
   };
   // The event for opening the info window for each marker when click it's corresponding item in list.
-  this.listToMarkerEvent = function (dataSet, mkr, map) {
-
+  this.listToMarkerEvent = function (clickedlist, index) {
+    if (self.mapMarkers().length != 0){
+      if (infowindowforlist != null){
+        infowindowforlist.close()
+      }
+      var content = infoWindowTemplate(clickedlist);
+      infowindowforlist = new google.maps.InfoWindow({
+        content: content,
+        maxWidth: 250
+      });
+      map.panTo(self.mapMarkers()[index].position);
+      map.setZoom(14);
+      infowindowforlist.open(map, self.mapMarkers()[index]);
+    }
   };
   /*
    * Map initial function
@@ -126,7 +139,14 @@ function mapViewModel() {
             var icon = mkr.getIcon();
             icon.url = '/images/yelp_star_active.png';
             mkr.setIcon(icon);
-            infowindow.open(map, mkr)
+            infowindow.open(map, mkr);
+            map.panTo(self.mapMarkers()[i].position);
+            map.setZoom(14);
+            if (infowindowforlist != null){
+              if (infowindowforlist.getMap() != null && typeof infowindowforlist.getMap() !== "undefined"){
+                infowindowforlist.close()
+              }
+            }
           });
           // Add mouse out event to change the icon back to origin.
           mkr.addListener('mouseout', function() {
@@ -199,7 +219,8 @@ function mapViewModel() {
   }
   this.switchShow = function(){
    $('#switch').toggleClass('switchShow');
-    $('#mark_info').toggleClass('show')
+    $('#mark_info').toggleClass('show');
+    $('#yelp_list').find('li').removeClass('active');
   };
   // Map sequence initiating and set original info as Chinese food
   mapInit();

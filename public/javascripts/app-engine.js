@@ -2,7 +2,7 @@
  * Created by tianhengzhou on 12/4/15.
  * This file contains the logic that used to initial the map and put the marker on the map
  */
-function mapViewModel() {
+function mapviewmodel() {
   var self = this;
   var infowindowforlist;
   // Define search term and assign initial value as Chinese food
@@ -43,12 +43,12 @@ function mapViewModel() {
     clearMarker();
     if (!filterTerm){
       self.filterList(rawList);
-      rawList.forEach(function(item,i){
-        pushBusinessMarker(item, i, 0);
+      rawList.forEach(function(item){
+        pushBusinessMarker(item, null, 0);
       });
     }
     else{
-      rawList.forEach(function(item,i){
+      rawList.forEach(function(item){
         if (item.name.toLowerCase().indexOf(filterTerm) != -1){
           array().push(item);
           pushBusinessMarker(item, count);
@@ -105,9 +105,6 @@ function mapViewModel() {
     var iconImage = {
       url: '/images/yelp_star.png',
       size: new google.maps.Size(24, 32)
-    };
-    var activeImage = {
-      url: '/images/yelp_star_active.png'
     };
     var content = infoWindowTemplate(dataSet);
     var infowindow = new google.maps.InfoWindow({
@@ -236,7 +233,7 @@ function mapViewModel() {
 }
 
 $(function() {
-  var MVM = new mapViewModel();
+  var MVM = new mapviewmodel();
   ko.applyBindings(MVM);
   MVM.filterTerm.subscribe(function(){
     MVM.filterResult()

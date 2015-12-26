@@ -83,6 +83,10 @@ function mapViewModel() {
         $('#mark_info').removeClass('show');
         $('#switch').removeClass('switchShow');
       }, 600);
+      if (infowindowforlist != null){
+        infowindowforlist.close()
+      }
+      map.setZoom(12);
       $('#yelp_list').find('li').removeClass('active');
       self.mapMarkers().forEach(function(marker) {
         marker.setAnimation(null);
@@ -221,6 +225,10 @@ function mapViewModel() {
    $('#switch').toggleClass('switchShow');
     $('#mark_info').toggleClass('show');
     $('#yelp_list').find('li').removeClass('active');
+    if (infowindowforlist != null){
+      infowindowforlist.close()
+    }
+    map.setZoom(12);
   };
   // Map sequence initiating and set original info as Chinese food
   mapInit();

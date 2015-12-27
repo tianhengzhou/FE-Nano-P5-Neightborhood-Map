@@ -66,9 +66,11 @@ function mapviewmodel() {
     if (self.mapMarkers().length !== 0) {
       if (infowindowforlist !== null) {
         infowindowforlist.close();
-      } else if (infowindow !== null) {
+      }
+      if (infowindow !== null) {
         infowindow.close();
       }
+      self.active(index);
       var content = infoWindowTemplate(clickedlist);
       infowindowforlist = new google.maps.InfoWindow({
         content: content,
@@ -194,7 +196,7 @@ function mapviewmodel() {
     });
     self.filterList(self.blists());
   }
-
+  // Clear all mark from map
   function clearMarker() {
     self.mapMarkers().forEach(function (marker) {
       marker.setMap(null);
@@ -245,6 +247,7 @@ function mapviewmodel() {
       infowindowforlist.close();
     }
     map.setZoom(12);
+    self.active(null);
   };
   // Map sequence initiating and set original info as Chinese food
   mapInit();
